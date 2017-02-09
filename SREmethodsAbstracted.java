@@ -9,7 +9,7 @@ public class SREmethodsAbstracted {
 		SREwebdriverScript SRE = new SREwebdriverScript();
 		SRE.open();
 		SRE.getTitle();
-		SRE.rowCntChk();
+		SRE.colCntChk();
 		SRE.valueRangechk();
 		SRE.noNullchk();
 		SRE.closeBrowser();
