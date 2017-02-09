@@ -87,20 +87,5 @@ public void closeBrowser() {
 	driver.close();
 }
 
-public static void main(String[] args) throws IOException {
-	SREwebdriverScript SRE = new SREwebdriverScript();
-	SRE.open();
-	SRE.getTitle();
-	SRE.rowCntChk();
-	SRE.valueRangechk();
-	SRE.noNullchk();
-	SRE.closeBrowser();
-	
-	
-	
-//	BCScrapper.closeBrowser();
-	
-	
-	
-}
+
 }
