@@ -35,7 +35,7 @@ public void getTitle() throws IOException {
 	System.out.println(title+" page fully loaded");
 }
 
-public void rowCntChk(){
+public void colCntChk(){
 	
 int	col_count =(Integer) js.executeScript("return document.getElementsByTagName('td').length");
 System.out.println(col_count);
