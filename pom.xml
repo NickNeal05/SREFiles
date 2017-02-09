@@ -4,4 +4,30 @@
   <artifactId>sreTraining</artifactId>
 <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
+
+<dependencies>
+<dependency>
+  <groupId>junit</groupId>
+  <artifactId>junit</artifactId>
+  <version>4.12</version>
+</dependency>
+<dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-firefox-driver</artifactId>
+        <version>3.0.1</version>
+    </dependency>
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-chrome-driver</artifactId>
+	    <version>2.3.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.seleniumhq.selenium</groupId>
+	    <artifactId>selenium-support</artifactId>
+	    <version>2.0a7</version>
+	</dependency>
+
+
+</dependencies>
+
 </project>
