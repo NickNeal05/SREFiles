@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,7 +41,7 @@ int	col_count =(Integer) js.executeScript("return document.getElementsByTagName(
 System.out.println(col_count);
 }
 
-	public void valueRangechk(){
+	public void valueRangechk() throws StaleElementReferenceException{
 		WebElement table = driver.findElement(By.id("table")); 
 		// Now get all the TR elements from the table 
 		List<WebElement> allRows = table.findElements(By.tagName("tr")); 
