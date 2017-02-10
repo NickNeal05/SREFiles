@@ -1,4 +1,8 @@
+import static org.junit.Assert.*;
+
 import java.io.IOException;
+
+import junit.framework.Assert;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,30 +16,42 @@ public class Junit {
 	@Before
 	public void openPage(){
 		SRE.open();
+		
 	}
 	
 @Test
 	public void titleChk() throws IOException{
-		SRE.getTitle();
+	String title=SRE.getTitle();
+	assertEquals(title,
+            "Self-Eval Table");
 	}
 	
 @Test
 	public void columCntChk(){
-		SRE.colCntChk();
-	}
+	int colCount=9;
+	int actualColcount=SRE.colCntChk();
+		assertEquals(colCount,
+				actualColcount);
+		}
 	
 @Test
 	public void rangeChk(){
-		SRE.valueRangechk();
+	boolean isInRange=SRE.valueRangechk();
+	//some values are out of range so expected assert is false
+	assertEquals(false,
+			isInRange);
 	}
 	
 @Test
 	public void nullChk(){
-		SRE.noNullchk();
+		boolean isNull=SRE.noNullchk();
+		assertEquals(true,
+				isNull);
+			
 	}
 	
 @After
-	public void openPagw(){
+	public void closePage(){
 		SRE.closeBrowser();
 	}
 
