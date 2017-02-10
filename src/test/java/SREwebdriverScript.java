@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -24,45 +24,59 @@ public class SREwebdriverScript {
 
 	
 public void open() {
-driver.navigate().to("file:///C:/Users/keesh/Desktop/index.html");
+driver.navigate().to("C:\\Users\\keesh\\Desktop\\apps\\index.html");
 
 }
 
 
-public void getTitle() throws IOException {
+public String getTitle() throws IOException {
 	String title=driver.getTitle().toString();
 	driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 	System.out.println(title+" page fully loaded");
-}
-
-public void colCntChk(){
 	
-int	col_count =(Integer) js.executeScript("return document.getElementsByTagName('td').length");
-System.out.println(col_count);
+	return title;
 }
 
-	public void valueRangechk() throws StaleElementReferenceException{
-		WebElement table = driver.findElement(By.id("table")); 
-		// Now get all the TR elements from the table 
-		List<WebElement> allRows = table.findElements(By.tagName("tr")); 
+public int colCntChk(){
+	int col_count=0;
+	WebElement table = driver.findElement(By.id("table")); 
+	List<WebElement> allCols = table.findElements(By.tagName("th")); 
+	for (WebElement col : allCols) { 
+		col_count++;	}
+System.out.println("column count= "+col_count);
+return col_count;
+}
 
-		// And iterate over them, getting the cells 
+public boolean valueRangechk() throws StaleElementReferenceException{
+	boolean isInRange = false;
+		WebElement table = driver.findElement(By.id("table")); 
+		List<WebElement> allRows = table.findElements(By.tagName("tr")); 
+ 
 		for (WebElement row : allRows) { 
 		    List<WebElement> cells = row.findElements(By.tagName("td")); 
 
-		    // Print the contents of each cell
 		    for (WebElement cell : cells) { 
-		    	if (!(cell.getText().contentEquals("1")) || (!(cell.getText().contentEquals("2")) || (!(cell.getText().contentEquals("3")) ||
-		    			(!(cell.getText().contentEquals("4")) || (!(cell.getText().contentEquals("5"))))))){
-		    		System.out.println("value is out of range");
+		    	String cellValue=cell.getText().toString();
+		    if(cellValue.matches(".*\\d+.*")){
+		    	if (cellValue.contentEquals("1") || (cellValue.contentEquals("2") || (cellValue.contentEquals("3") || (cellValue.contentEquals("4") || (cellValue.contentEquals("5"))))))
+		    	{
+		    		System.out.println(cellValue+" value IS in range");
+		    		isInRange=true;
 		    	}
-		        System.out.println(cell.getText());
-		        
-		    }
-		}
-	}
+		    	else if (!(cellValue.contentEquals("1")) && (!(cellValue.contentEquals("2")) && (!(cellValue.contentEquals("3")) && (!(cellValue.contentEquals("4")) && (!(cellValue.contentEquals("5")))))))
+		    	{
+			    	isInRange= false;
+		    	System.out.println(cellValue+" Value is NOT in range");
+		    											}
+		    								 }
+		    							}
+									}  
+		return isInRange; 									}
+
+
+public boolean noNullchk(){
 	
-public void noNullchk(){
+	boolean isAnyNull = false;
 	WebElement table = driver.findElement(By.id("table")); 
 	List<WebElement> allRows = table.findElements(By.tagName("tr")); 
 
@@ -70,19 +84,19 @@ public void noNullchk(){
 	for (WebElement row : allRows) { 
 	    List<WebElement> cells = row.findElements(By.tagName("td")); 
 
-	    // Print the contents of each cell
+	    // Check the contents of each cell
 	    for (WebElement cell : cells) { 
-	    	if (cell.getText().isEmpty() || (cell==null)){
-	    		System.out.println("This value is null and not acceptable");
+	    	String cellValue=cell.getText();
+	    	if (cellValue.isEmpty() || (cellValue.equals(null)) || (cellValue.contentEquals(""))){
+	    		System.out.println("This value "+ cellValue+" is null and not acceptable");
+	    		isAnyNull=true;
 	    	}
-	        //System.out.println(cell.getText());
+	    	else isAnyNull=false;
 	        
 	    }
-	}
+	}return isAnyNull;
 }	
 	 
-	
-
 
 public void closeBrowser() {
 	driver.close();
